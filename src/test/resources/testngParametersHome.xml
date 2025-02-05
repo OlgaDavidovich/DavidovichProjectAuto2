@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<suite name = "AllTests Suite">
+    <test name = "Test1">
+        <parameter name = "email" value = "olga@mail.ru"/>
+        <parameter name = "password" value="olgaOlga"/>
+        <classes>
+           <class name = "TaskFiveParameters"/>
+        </classes>
+    </test>
+    <test name = "Test2">
+        <parameter name = "email" value = "tom@mail.ru"/>
+        <parameter name = "password" value="tomTomTom"/>
+        <classes>
+            <class name = "TaskFiveParameters"/>
+        </classes>
+    </test>
+    <test name = "Test3">
+        <parameter name = "email" value = "alina@mail.ru"/>
+        <parameter name = "password" value="alinaAlina"/>
+        <classes>
+            <class name = "TaskFiveParameters"/>
+        </classes>
+    </test>
+</suite>
