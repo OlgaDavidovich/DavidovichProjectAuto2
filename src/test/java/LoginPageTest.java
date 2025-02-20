@@ -1,9 +1,15 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Story;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import utils.driver.DriverSetUp;
+import utils.driver.listener.MyListener;
+
+@Listeners({MyListener.class})
 
 public class LoginPageTest {
 
@@ -11,12 +17,9 @@ public class LoginPageTest {
     public static LoginPage loginPage;
 
     @BeforeClass
-    public void SetUp() throws InterruptedException {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+    public void setUp() {
+        driver = DriverSetUp.driverInit();
         loginPage = new LoginPage(driver);
-        Thread.sleep(2000);
     }
 
     @AfterClass
@@ -24,6 +27,9 @@ public class LoginPageTest {
         driver.quit();
     }
 
+    @Description("Login Positive Test")
+    @Epic("Epic 2")
+    @Story("US-101")
     @Test(priority = 1)
     public void loginPositiveTest() {
         loginPage.openLoginPage();
@@ -32,6 +38,9 @@ public class LoginPageTest {
         loginPage.clickSignInButton();
     }
 
+    @Description("Login Negative Test With Wrong Email")
+    @Epic("Epic 2")
+    @Story("US-102")
     @Test(priority = 2)
     public void loginNegativeTestWithWrongEmail() {
         loginPage.openLoginPage()
@@ -41,6 +50,9 @@ public class LoginPageTest {
                 .checkErrorMessageSignIn();
     }
 
+    @Description("Login Negative Test With Wrong Password")
+    @Epic("Epic 2")
+    @Story("US-102")
     @Test(priority = 3)
     public void loginNegativeTestWithWrongPassword() {
         loginPage.openLoginPage()
@@ -50,6 +62,9 @@ public class LoginPageTest {
                 .checkErrorMessageSignIn();
     }
 
+    @Description("Link Registration")
+    @Epic("Epic 2")
+    @Story("US-108")
     @Test(priority = 4)
     public void linkRegistration() {
         loginPage.openLoginPage()
@@ -57,6 +72,9 @@ public class LoginPageTest {
                 .checkRegistrationFormName();
     }
 
+    @Description("Registration Positive Test")
+    @Epic("Epic 1")
+    @Story("US-101")
     @Test(priority = 5)
     public void registrationPositiveTest() throws InterruptedException {
         loginPage.openRegistration()
@@ -70,6 +88,9 @@ public class LoginPageTest {
                 .clickSubmitButton();
     }
 
+    @Description("Link SignIn/Problem Test")
+    @Epic("Epic 1")
+    @Story("US-108")
     @Test(priority = 6)
     public void linkSignIn() {
         loginPage.openRegistration()
@@ -77,6 +98,9 @@ public class LoginPageTest {
                 .checkSignInFormName();
     }
 
+    @Description("Registration Without Data Test")
+    @Epic("Epic 1")
+    @Story("US-104")
     @Test(priority = 10)
     public void registrationWithoutDataTest() throws InterruptedException {
         loginPage.openRegistration()
@@ -84,6 +108,9 @@ public class LoginPageTest {
                 .checkErrorMessageRegistration();
     }
 
+    @Description("Registration With Short Password Test")
+    @Epic("Epic 1")
+    @Story("US-107")
     @Test(priority = 7)
     public void registrationWithShortPasswordTest() throws InterruptedException {
         loginPage.openRegistration()
@@ -97,6 +124,9 @@ public class LoginPageTest {
                 .checkErrorMessageLengthPasswordReg();
     }
 
+    @Description("Registration With Wrong Password Confirmation Test")
+    @Epic("Epic 1")
+    @Story("US-107")
     @Test(priority = 8)
     public void registrationWithWrongPasswordConfirmationTest() throws InterruptedException {
         loginPage.openRegistration()
@@ -111,6 +141,9 @@ public class LoginPageTest {
                 .checkErrorMessagePasswordReg();
     }
 
+    @Description("Registration With Wrong Email Test")
+    @Epic("Epic 1")
+    @Story("US-106")
     @Test(priority = 9)
     public void registrationWithWrongEmailTest() throws InterruptedException {
         loginPage.openRegistration()
